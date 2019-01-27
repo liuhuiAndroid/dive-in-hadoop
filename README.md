@@ -43,17 +43,122 @@
 * Google只发表了技术论文，并没有开放源代码
 * 一个模仿Google大数据技术的开源实现来了
 
-# 第2章 初识Hadoop
-## 2-1 课程目录
+# 第2章 初识Hadoop 
 ## 2-2 Hadoop概述
+
+Apache社区的顶级项目：xxxx.apache.org
+	hadoop.apache.org
+	hive.apache.org
+	hbase.apache.org
+	spark.apache.org
+	flink.apache.org
+	storm.apache.org
+
+*  Hadoop是一个分布式的系统基础架构
+
+  分布式文件系统：HDFS实现将文件分布式存储在很多的服务器上
+  分布式计算框架：MapReduce实现在很多机器上分布式并行计算
+  分布式资源调度框架：YARN实现集群资源管理以及作业的调度
+
 ## 2-3 Hadoop核心组件之HDFS概述
+
+* 源自于Google的GFS论文，论文发表于2003年10月
+* HDFS是GFS的克隆版
+* HDFS特点：扩展性&容错性&海量数据存储
+* 将文件切分成指定大小的数据块并以多副本的存储在多个机器上
+* 数据切分、多副本、容错等操作对用户是透明的 
+
 ## 2-4 Hadoop核心组件之MapReduce
+
+* 源自于Google的MapReduce论文，论文发表于2004年12月
+* MapReduce是Google MapReduce的克隆版
+* MapReduce特点：扩展性&容错性&海量数据离线处理
+
 ## 2-5 Hadoop核心组件之YARN
+
+* YARN：Yet Another Resource Negotiator
+
+* 负责整个集群资源的管理和调度 
+* YARN特点：扩展性&容错性&多框架资源统一调度
+
 ## 2-6 Hadoop优势
+
+* 高可靠性
+
+  数据存储：数据块多副本
+
+  数据计算：重新调度作业计算
+
+* 高扩展性
+
+  存储/计算资源不够时，可以横向的线性扩展机器
+
+  一个集群中可以包含数以千计的节点
+
+* 其他
+
+  存储在廉价机器上，降低成本
+
+  成熟的生态圈
+
 ## 2-7 Hadoop发展史
+
+[Hadoop 十年解读与发展预测](https://www.infoq.cn/article/hadoop-ten-years-interpretation-and-development-forecast)
+
 ## 2-8 Hadoop生态圈
+
+* 狭义Hadoop VS 广义Hadoop
+
+  狭义Hadoop：是一个适合大数据分布式存储（HDFS）、分布式计算（MapReduce）和资源调度（YARN）的平台
+
+  广义Hadoop：指的是Hadoop生态系统，Hadoop生态系统是一个很庞大的概念，Hadoop是其中最重要最基础的一个部分；生态系统中的每一子系统只解决某一个特定的问题域（甚至可能很窄），不搞统一型的一个全能系统，而是小而精的多个小系统
+
+* Hadoop生态系统的特点
+
+  开源、社区活跃
+
+  囊括了大数据处理的方方面面
+
+  成熟的生态圈
+
 ## 2-9 Hadoop发行版选型
+
+常用的Hadoop发行版
+	Apache
+		优点：纯开源
+		缺点：不同版本/不同框架之间整合 jar冲突... 吐血
+
+​	CDH：https://www.cloudera.com/   60-70%
+​		优点：cm(cloudera manager) 通过页面一键安装各种框架、升级、支持impala
+​		缺点：cm不开源、与社区版本有些许出入
+
+​	Hortonworks：HDP  企业发布自己的数据平台可以直接基于页面框架进行改造
+​		优点：原装Hadoop、纯开源、支持tez
+​		缺点：企业级安全不开源
+
+​	MapR
+
 ## 2-10 OOTB环境的使用
+
+VMvare打开hadoop000.rar中的hadoop000.vmx
+
+密码123456
+
+```shell
+sudo -i
+cd /etc/sysconfig/network-scripts
+rm ifcfg-lo
+ip addr # 复制物理地址
+vi ifcfg-eth0
+#物理地址修改
+#配置ip和gateway
+
+vi /etc/sysconfig/network #配置主机名
+vi /etc/resolv.conf #配置nameserver
+reboot
+ping www.baidu.com
+ssh hadoop@192.168.199.233 #远程操作
+```
 
 # 第3章 分布式文件系统HDFS
 ## 3-1 HDFS概述
